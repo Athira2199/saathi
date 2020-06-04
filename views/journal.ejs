@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width ,initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible">
+        <title>saathi</title>
+        <link rel="stylesheet" href="home.css">
+        </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="navbar-brand mb-0 h1 text-white ">SAATHI</span>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                    <button class="navbar-brand  btn btn-danger">logout</button></span>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <button class="btn btn-success" data-toggle="modal" data-target="#write">write</button>
+            </div>
+            <div class="col-md-6 text-center">
+               <button class="btn btn-primary" data-toggle="modal" data-target="#view"> view </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <% if(date){ %>
+                <%= date %>
+                <% } %>
+            </div>
+            <div class="col-md-12">
+                <%= content %>
+            </div>
+          
+        </div>
+
+        <!--write-->
+        <div class="modal fade" id="write" role="dialog">
+            <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">PEN DOWN YOUR THOUGHTS</h4>
+            </div>
+            <div class="modal-body">
+                <form  action="write">
+                    <div class="md-form md-outline input-with-post-icon datepicker">
+                        <input placeholder="Select date" type="date" id="example" class="form-control" name="date">
+                        <input type="text" placeholder="pen doen your thoughts " class="form-control" name="content">
+
+                      </div>
+                    <input type="submit">
+                   </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+        
+        <!--view-->
+        <div class="modal fade" id="view" role="dialog">
+            <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">MEMORIES</h4>
+            </div>
+            <div class="modal-body">
+               <form  action="view">
+                <div class="md-form md-outline input-with-post-icon datepicker">
+                    <input placeholder="Select date" type="date" id="example" class="form-control" name="date">
+                  </div>
+                <input type="submit">
+               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    
+    
+    </body>
+</html>

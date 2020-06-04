@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width ,initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible">
+        <title>saathi</title>
+        <link rel="stylesheet" href="home.css">
+        </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="navbar-brand mb-0 h1 text-white ">SAATHI</span>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                    <button class="navbar-brand  btn btn-danger">logout</button></span>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-md-11"></div>
+            <div class="col-md-1"><button class="btn btn-success" data-toggle="modal" data-target="#add">ADD</button></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-5 ">
+                 <% if (success) { %>
+                    <h4><p class="error text-success bg-success text-center"><%= success %></p>
+                  <% } %></h4>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead><tr><th scope="col">S.No</th><th scope="col">name</th><th scope="col">email</th><th scope="col">phone</th></tr></thead>
+                    <tbody>
+                <% for(var j=0;j < results.length;j++){ %>
+                    <tr>
+                    <th scope="row"><%= j+1 %></th>
+                   <td><%= results[j].name %></td>
+                    <td><%= results[j].email %></td>
+                    <td><%= results[j].phone %></td>
+                    </tr>
+                <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--add-->
+        <div class="modal fade" id="add" role="dialog">
+            <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">DIRECTORY</h4>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="directory/add">
+                <label for="name">NAME</label><input type = "text" name="name" class="form-control">
+                <label for="mobile">MOBILE</label><input type = "text" name="mobile" class="form-control">
+                <label for="email">EMAIL</label><input type = "email" name="email" class="form-control">
+                <input type="submit" class="add">
+               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    
+    </body>
+</html>

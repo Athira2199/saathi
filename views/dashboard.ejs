@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width ,initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible">
+        <title>saathi</title>
+        <link rel="stylesheet" href="home.css">
+        </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="navbar-brand mb-0 h1 text-white ">SAATHI</span>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                    <button class="navbar-brand  btn btn-danger">logout</button></span>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid favourites">
+        <div class="row">
+            <div class="col-sm-1 categories">
+            </div>
+            <div class="col-sm-3 categories">
+                
+                <h3><p class="centered">EXPENSE</p></h3>
+                <button class="btn btn-primary buttoncenter"><a href="<%= id %>/expense">click to view more</a></button>
+            </div>
+            <div class="col-sm-1 categories">
+            </div>
+            <div class="col-sm-3 categories">
+               
+                <h3><p class="centered">DIRECTORY</p></h3>
+                <button class="btn btn-primary buttoncenter"><a href="<%= id %>/directory">click to view more</a></button>
+            </div>
+            <div class="col-sm-1 categories">
+            </div>
+            <div class="col-sm-3 categories">
+               
+                <h3><p class="centered">JOURNAL</p></h3>
+                <button class="btn btn-primary buttoncenter"><a href="<%= id %>/journal">click to view more</a></button>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-sm-3 categories">
+        </div>
+        <div class="col-sm-4 categories">
+            
+            <h3><p class="centered">TO DO</p></h3>
+            <button class="btn btn-primary buttoncenter"><a href="<%= id %>/todo">click to view more</a></button>
+        </div>
+        <div class="col-sm-4 categories">
+           
+            <h3><p class="centered">NOTE TAKER</p></h3>
+            <button class="btn btn-primary buttoncenter"><a href="<%= id %>/notes">click to view more</a></button>
+        </div>
+        <div class="col-sm-1 categories">
+        </div>
+    </div>
+    </div>
+    </body>
+</html>

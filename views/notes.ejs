@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width ,initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible">
+        <title>saathi</title>
+        <style>
+            a{
+                text-decoration:none;
+                color:white;
+            }
+            a:hover{
+                text-decoration: none;
+                color:white;
+            }
+        </style>
+        </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="navbar-brand mb-0 h1 text-white ">SAATHI</span>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                    <button class="navbar-brand  btn btn-danger">logout</button></span>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-11"></div>
+                <div class="col-md-1"><button class="btn btn-success" data-toggle="modal" data-target="#add">ADD</button></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 test-center">
+                    <p class="text-center">TOTAL NO OF NOTES : <%= results.length %></p>
+                </div>
+            </div>
+            <div class="row">
+            <% for(var j=0;j < results.length;j++){ %>
+                <div class="col-md-1"></div>
+                <div class="col-md-3" style="background-color: aliceblue;padding:7%;">
+                <%= results[j].content %>
+               <p class="text-success"> IMPORTANCE:<%= results[j].rating %></p><br>
+               <button class="btn btn-danger"><a href="notes/<%= results[j].id%>/delete">DELETE NOTE</a></button>
+                </div>
+            <% } %>
+            </div>
+        </div>
+        <!--ADD-->
+        <div class="modal fade" id="add" role="dialog">
+            <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">ADD NEW NOTES</h4>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="notes/add">
+                <label for="name">CONTENT</label><input type = "text" name="content" class="form-control">
+                <b>RATING</b><br>
+                1<input type = "radio" name="rating" value="1"> 
+                2<input type = "radio" name="rating"  value="2"> 
+                3<input type = "radio" name="rating"  value="3"> 
+                4<input type = "radio" name="rating" value="4"> 
+                5<input type = "radio" name="rating" value="5"> <br>
+                <input type="submit" class="add">
+               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </body>
+</html>
