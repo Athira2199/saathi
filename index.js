@@ -91,14 +91,89 @@ app.get('/user/:id',(req,res)=>{
 })
 
 app.get('/user/:id/expense',(req,res)=>{
-    res.render("expense")
+    var s="SELECT * FROM  categories";
+    response(s)
+        .then((result)=>{
+            res.render("expense",{
+                results:result
+            })
+        })
+        .catch((err)=>{
+            console.log("error");
+            throw err;
+        })         
 })
-app.get('/user/:id/journal',(req,res)=>{
-    res.render("journal")
+app.get('/user/:id/expense/add',(req,res)=>{
+    var s="INSERT INTO expense (user_id,category_id,amount,date) VALUES("+"'"+req.params.id+"',"+"'"+req.query.category+"',"+"'"+req.query.amount+"',"+"'"+req.query.date+"')";
+    response(s)
+        .then((result)=>{
+            req.flash('success', "successfully added");
+            res.redirect("/user/"+req.params.id+"/expense")
+        })
+        .catch((err)=>{
+            console.log("error");
+            throw err;
+        })      
+})
+app.get('/user/:id/expense/overview',(req,res)=>{
+    var s="SELECT SUM(amount) as total FROM expense WHERE category_id="+"'"+req.query.category+"'";
+    response(s)
+    .then((result)=>{
+       return result[0].total;
+    })
+    
+    .catch((err)=>{
+    
+        console.log("error");
+        throw err;
+    })   
 })
 app.get('/user/:id/todo',(req,res)=>{
-    res.render("todo")
+    var sort="STATUS";
+    if(req.query.sort){
+        sort=req.query.sort
+    }
+    var s="SELECT * FROM  todo WHERE user_id = "+"'"+req.params.id+"'"+"ORDER BY "+sort;
+    response(s)
+        .then((result)=>{
+            res.render("todo",{
+                results:result
+            })
+        })
+        .catch((err)=>{
+        
+            console.log("error");
+            throw err;
+        })      
 })
+
+app.get('/user/:id/todo/add',(req,res)=>{
+    var s="INSERT INTO todo (user_id,status,aim,start_date,end_date) VALUES("+"'"+req.params.id+"',"+"'"+req.query.status+"',"+"'"+req.query.aim+"',"+"'"+req.query.start_date+"',"+"'"+req.query.end_date+"')";
+    response(s)
+        .then((result)=>{
+            res.redirect("/user/"+req.params.id+"/todo")
+        })
+        .catch((err)=>{
+            console.log("error");
+            throw err;
+        })      
+})
+
+app.get('/user/:id/todo/:nid/delete',(req,res)=>{
+    var s= 'DELETE FROM todo WHERE id ='+"'"+req.params.nid+"'"+"AND user_id = "+"'"+req.params.id+"'";
+    response(s)
+        .then((result)=>{
+            req.flash('error', "successfully deleted");
+            res.redirect('/user/'+req.params.id+'/todo')
+        })
+        .catch((err)=>{
+            req.flash('error', "oops something happened");
+            console.log(err);
+            throw err;
+        })
+})
+
+
 app.get('/user/:id/directory',(req,res)=>{
     var s="SELECT * FROM  DIRECTORY WHERE user_id = "+"'"+req.params.id+"'"+"ORDER BY name";
     response(s)
@@ -146,10 +221,11 @@ app.post('/user/:id/notes/add',(req,res)=>{
     var s="INSERT INTO notes (user_id,content,rating) VALUES("+"'"+req.params.id+"',"+"'"+req.body.content+"',"+"'"+req.body.rating+"')";
     response(s)
         .then((result)=>{
-          res.redirect('/user/'+req.params.id+'/notes')
+            req.flash('success', "successfully added");
+            res.redirect('/user/'+req.params.id+'/notes')
         })
         .catch((err)=>{
-           
+            req.flash('error', "oops something happened");
             console.log("error");
             throw err;
         })    
@@ -159,12 +235,21 @@ app.get('/user/:id/notes/:nid/delete',(req,res)=>{
     var s= 'DELETE FROM notes WHERE id ='+"'"+req.params.nid+"'"+"AND user_id = "+"'"+req.params.id+"'";
     response(s)
         .then((result)=>{
+            req.flash('error', "successfully deleted");
             res.redirect('/user/'+req.params.id+'/notes')
         })
         .catch((err)=>{
+            req.flash('error', "oops something happened");
             console.log(err);
             throw err;
         })
+})
+
+app.get('/user/:id/journal',(req,res)=>{
+    res.render("journal",{
+        content:"",
+        date:""
+    })
 })
 
 app.get('/user/:id/view',(req,res)=>{
@@ -173,6 +258,10 @@ app.get('/user/:id/view',(req,res)=>{
     var s="SELECT * FROM journal WHERE date = "+"'"+date+"'"+"AND user_id = "+"'"+id+"'";
     response(s)
         .then((result)=>{
+            if(result.length<0){
+                date=""
+                content=""
+            }
                res.render('journal',{
                    content:result[0].content,
                    date:date

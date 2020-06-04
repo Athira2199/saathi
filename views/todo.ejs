@@ -35,7 +35,17 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-11"></div>
+                <div class="col-md-3">
+                    <form>
+                        <select name="sort">
+                            <option value="STATUS">Status</option>
+                            <option value="start_date">Start Date</option>
+                            <option value="end_date">End Date</option>
+                        </select>
+                    <input type="submit" value="sort" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="col-md-8"></div>
                 <div class="col-md-1"><button class="btn btn-success" data-toggle="modal" data-target="#add">ADD</button></div>
             </div>
             <div class="row">
@@ -56,40 +66,50 @@
             </div>
             <div class="row">
                 <div class="col-md-12 test-center">
-                    <p class="text-center">TOTAL NO OF NOTES : <%= results.length %></p>
+                    <p class="text-center">TOTAL NO OF TO DOs : <%= results.length %></p>
                 </div>
             </div>
             <div class="row">
             <% for(var j=0;j < results.length;j++){ %>
                 <div class="col-md-1"></div>
                 <div class="col-md-3" style="background-color: aliceblue;padding:7%;">
-                <%= results[j].content %>
-               <p class="text-success"> IMPORTANCE:<%= results[j].rating %></p><br>
-               <button class="btn btn-danger"><a href="notes/<%= results[j].id%>/delete">DELETE NOTE</a></button>
-                </div>
+                <p><span class="alert-info">AIM:</span><%= results[j].aim %></p>
+                <% if (results[j].status==0) { %>
+                    <p class="alert-danger">INCOMPLETE</p>
+                <% } %>
+                <% if (results[j].status==1) { %>
+                    <p class="alert-success">COMPLETE</p>
+                <% } %>
+                <p><span class="alert-success">START DATE:</span><%= results[j].start_date %></p>
+                <p><span class="alert-danger">END DATE</span><%= results[j].end_date %></p>
+               <button class="btn btn-danger"><a href="todo/<%= results[j].id%>/delete">DELETE</a></button>
+                </div>     
             <% } %>
             </div>
         </div>
-        <!--ADD-->
-        <div class="modal fade" id="add" role="dialog">
+         <!--ADD-->
+         <div class="modal fade" id="add" role="dialog">
             <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">ADD NEW NOTES</h4>
+              <h4 class="modal-title">ADD NEW TO DO </h4>
             </div>
             <div class="modal-body">
-               <form method="POST" action="notes/add">
-                <label for="name">CONTENT</label><input type = "text" name="content" class="form-control">
-                <b>RATING</b><br>
-                1<input type = "radio" name="rating" value="1"> 
-                2<input type = "radio" name="rating"  value="2"> 
-                3<input type = "radio" name="rating"  value="3"> 
-                4<input type = "radio" name="rating" value="4"> 
-                5<input type = "radio" name="rating" value="5"> <br>
-                <input type="submit" class="add">
-               </form>
+               <form action="todo/add">
+                <label for="aim">AIM</label><input type = "text" name="aim" class="form-control" placeholder="enter your aim">
+                <label for="status">STATUS</label><input type = "text" name="status" class="form-control" value=0>
+                <div class="md-form md-outline input-with-post-icon datepicker">
+                    <label for="start_date">START DATE</label>
+                    <input placeholder="Select Start Date" type="date" id="example" class="form-control" name="start_date">
+                </div>
+                <div class="md-form md-outline input-with-post-icon datepicker">
+                    <label for="end_date">END DATE</label>
+                    <input placeholder="Select End Date" type="date" id="example" class="form-control" name="end_date">
+                </div>
+                <input type="submit" class="btn btn-success" class="form-control">
+                </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -32,8 +32,15 @@
             <div class="col-md-4"></div>
             <div class="col-md-5 ">
                  <% if (success) { %>
-                    <h4><p class="error text-success bg-success text-center"><%= success %></p>
-                  <% } %></h4>
+                    <div class=" alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                  <% } %>
+                  <% if (error) { %>
+                    <div class=" alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                  <% } %>
             </div>
             <div class="col-md-3"></div>
         </div>
